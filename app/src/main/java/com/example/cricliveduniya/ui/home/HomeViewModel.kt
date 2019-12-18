@@ -2,6 +2,7 @@ package com.example.cricliveduniya.ui.home
 
 import androidx.lifecycle.*
 import com.example.cricliveduniya.network.AllMatches
+import com.example.cricliveduniya.network.Matches
 import com.example.cricliveduniya.network.Network
 import kotlinx.coroutines.*
 
@@ -25,18 +26,18 @@ class HomeViewModel : ViewModel() {
     // The external immutable LiveData for the request status String
 
 
-//    private val _navigateToSelectedProperty = MutableLiveData<MarsProperty>()
-//
-//    val navigateToSelectedProperty: LiveData<MarsProperty>
-//        get() = _navigateToSelectedProperty
-//
-//    fun displayPropertyDetails(marsProperty: MarsProperty) {
-//        _navigateToSelectedProperty.value = marsProperty
-//    }
-//
-//    fun displayPropertyDetailsComplete() {
-//        _navigateToSelectedProperty.value = null
-//    }
+    private val _navigateToSelectedProperty = MutableLiveData<Matches>()
+
+    val navigateToSelectedProperty: LiveData<Matches>
+        get() = _navigateToSelectedProperty
+
+    fun displayPropertyDetails(marsProperty: Matches) {
+        _navigateToSelectedProperty.value = marsProperty
+    }
+
+    fun displayPropertyDetailsComplete() {
+        _navigateToSelectedProperty.value = null
+    }
 
     /**
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
@@ -55,6 +56,7 @@ class HomeViewModel : ViewModel() {
                 _status.value = MarsApiStatus.LOADING
 
                 val listResult =  getPropertiesDeferred.await()
+                System.out.println(listResult.toString())
                 _status.value = MarsApiStatus.DONE
                 _properties.value = listResult
             } catch (e: Exception) {

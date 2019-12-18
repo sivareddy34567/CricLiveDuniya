@@ -1,8 +1,11 @@
 package com.example.cricliveduniya.network
 
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 @JsonClass(generateAdapter = true)
 data class AllMatches(
@@ -14,22 +17,23 @@ data class AllMatches(
 @JsonClass(generateAdapter = true)
 data class MatchUrl(val match : String)
 
+@Parcelize
 @JsonClass(generateAdapter = true)
 data class Matches(
         val match_id : Int,
         val series_id : Int,
         val series_name : String,
         val data_path : String,
-        val header : HeaderMatch,
+        val header : @RawValue HeaderMatch,
         val alerts : Int,
-        val venue : Venue,
-        val bat_team : BatRBowlTeams = BatRBowlTeams(),
-        val bow_team : BatRBowlTeams = BatRBowlTeams(),
-        val batsman : List<Batsman> = ArrayList(),
-        val bowler : List<Bowler> = ArrayList(),
-        val team1 : Team,
-        val team2 : Team,
-        val srs_category : List<Int>){
+        val venue : @RawValue Venue,
+        val bat_team : @RawValue BatRBowlTeams = BatRBowlTeams(),
+        val bow_team : @RawValue BatRBowlTeams = BatRBowlTeams(),
+        val batsman : @RawValue List<Batsman> = ArrayList(),
+        val bowler : @RawValue List<Bowler> = ArrayList(),
+        val team1 : @RawValue Team,
+        val team2 : @RawValue Team,
+        val srs_category : List<Int>) : Parcelable{
     val title : String get() = header.match_desc+ ", "+ series_name
 }
 
@@ -66,6 +70,7 @@ data class Venue(
 @JsonClass(generateAdapter = true)
 class BatRBowlTeams(
         val id : Int = 0,
+        val name : String = "",
         val innings : List<Innings> = ArrayList())
 
 @JsonClass(generateAdapter = true)
@@ -105,6 +110,33 @@ data class Team(
         val s_name : String,
         val flag : String)
 
+@JsonClass(generateAdapter = true)
+data class Commentary(val match_id : Int,
+                      val series_id : Int,
+                      val series_name : String,
+                      val data_path : String,
+                      val header : @RawValue HeaderMatch,
+                      val alerts : Int,
+                      val venue : @RawValue Venue,
+                      val bat_team : @RawValue BatRBowlTeams = BatRBowlTeams(),
+                      val batsman : @RawValue List<Batsman> = ArrayList(),
+                      val bowler : @RawValue List<Bowler> = ArrayList(),
+                      val crr : String,
+                      val target : String,
+                      val prtshp : String,
+                      val comm_lines : @RawValue List<CommentaryLines>){
+
+        val score : String get() = "${bat_team.name} - ${bat_team.innings.get(0).score}/${bat_team.innings.get(
+                0
+        ).wkts} (${bat_team.innings.get(0).overs})"
+
+        val getcrr : String get() = "CRR : $crr"
+
+}
 
 
-
+@JsonClass(generateAdapter = true)
+data class CommentaryLines(
+        val o_no : String = "",
+        val score : String = "",
+        val comm : String = "")

@@ -7,6 +7,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 // Since we only have one service, this can all go in one file.
 // If you add more services, split this to multiple files and make sure to share the retrofit
@@ -18,6 +19,9 @@ import retrofit2.http.GET
 interface DevbyteService {
     @GET("cbzios/match/livematches")
     fun getPlaylist(): Deferred<AllMatches>
+
+    @GET("cbzios/match/{id}/commentary")
+    fun getCommentary(@Path("id") id : Int): Deferred<Commentary>
 }
 
 /**

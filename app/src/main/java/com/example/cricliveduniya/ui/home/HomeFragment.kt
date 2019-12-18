@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.cricliveduniya.R
 import com.example.cricliveduniya.databinding.FragmentHomeBinding
 
@@ -36,8 +37,14 @@ class HomeFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.photosGrid.adapter = MatchesAdapter(MatchesAdapter.OnClickListener {
-//            viewModel.displayPropertyDetails(it)
-            Toast.makeText(context,"${it.series_name}",Toast.LENGTH_SHORT).show()
+            viewModel.displayPropertyDetails(it)
+        })
+
+        viewModel.navigateToSelectedProperty.observe(this, Observer {
+            if ( null != it ) {
+                this.findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToLiveScoreFragment(it))
+                viewModel.displayPropertyDetailsComplete()
+            }
         })
 
         return binding.root

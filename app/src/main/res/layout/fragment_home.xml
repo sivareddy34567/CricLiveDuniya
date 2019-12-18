@@ -14,8 +14,8 @@
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photos_grid"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:padding="6dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:listData="@{viewModel.properties.matches}"
             tools:itemCount="16"
-            android:clipToPadding="false"
+            android:clipToPadding="true"
             tools:listitem="@layout/match_item" />
 
         <ImageView

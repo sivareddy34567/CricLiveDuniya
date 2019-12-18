@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.example.cricliveduniya.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_liveScoreFragment"
+            app:destination="@id/liveScoreFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +26,13 @@
         android:name="com.example.cricliveduniya.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/liveScoreFragment"
+        android:name="com.example.cricliveduniya.ui.livescore.LiveScoreFragment"
+        android:label="live_score_fragment"
+        tools:layout="@layout/live_score_fragment" >
+        <argument
+            android:name="match"
+            app:argType="com.example.cricliveduniya.network.Matches" />
+    </fragment>
 </navigation>
