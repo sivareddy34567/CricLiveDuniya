@@ -33,6 +33,18 @@
         tools:layout="@layout/live_score_fragment" >
         <argument
             android:name="match"
-            app:argType="com.example.cricliveduniya.network.Matches" />
+            app:argType="integer"
+            />
+        <action
+            android:id="@+id/action_liveScoreFragment_to_scoreCard"
+            app:destination="@id/scoreCard" />
+    </fragment>
+    <fragment
+        android:id="@+id/scoreCard"
+        android:name="com.example.cricliveduniya.ui.scorecard.ScoreCard"
+        android:label="ScoreCard" >
+        <argument
+            android:name="match"
+            app:argType="integer" />
     </fragment>
 </navigation>

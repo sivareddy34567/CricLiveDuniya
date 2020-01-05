@@ -37,7 +37,7 @@ class HomeFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.photosGrid.adapter = MatchesAdapter(MatchesAdapter.OnClickListener {
-            viewModel.displayPropertyDetails(it)
+            viewModel.displayPropertyDetails(it.match_id)
         })
 
         viewModel.navigateToSelectedProperty.observe(this, Observer {

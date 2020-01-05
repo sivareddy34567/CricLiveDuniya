@@ -2,6 +2,7 @@ package com.example.cricliveduniya.network
 
 
 import android.os.Parcelable
+import android.text.Html
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
@@ -17,7 +18,6 @@ data class AllMatches(
 @JsonClass(generateAdapter = true)
 data class MatchUrl(val match : String)
 
-@Parcelize
 @JsonClass(generateAdapter = true)
 data class Matches(
         val match_id : Int,
@@ -33,7 +33,7 @@ data class Matches(
         val bowler : @RawValue List<Bowler> = ArrayList(),
         val team1 : @RawValue Team,
         val team2 : @RawValue Team,
-        val srs_category : List<Int>) : Parcelable{
+        val srs_category : List<Int>) {
     val title : String get() = header.match_desc+ ", "+ series_name
 }
 
@@ -91,7 +91,12 @@ data class Batsman(
         val b : String,
         @Json(name = "4s")val fours : String = "",
         @Json(name = "6s")val sixs : String = ""
-)
+){
+        val nameString : String get() = (when {
+            strike.equals("1") -> "$name*"
+                else -> name
+        }).toString()
+}
 
 
 @JsonClass(generateAdapter = true)
@@ -119,18 +124,30 @@ data class Commentary(val match_id : Int,
                       val alerts : Int,
                       val venue : @RawValue Venue,
                       val bat_team : @RawValue BatRBowlTeams = BatRBowlTeams(),
+                      val bow_team : @RawValue BatRBowlTeams = BatRBowlTeams(),
                       val batsman : @RawValue List<Batsman> = ArrayList(),
                       val bowler : @RawValue List<Bowler> = ArrayList(),
-                      val crr : String,
-                      val target : String,
-                      val prtshp : String,
+                      val crr : String = "",
+                      val target : String = "",
+                      val prtshp : String = "",
                       val comm_lines : @RawValue List<CommentaryLines>){
 
-        val score : String get() = "${bat_team.name} - ${bat_team.innings.get(0).score}/${bat_team.innings.get(
-                0
-        ).wkts} (${bat_team.innings.get(0).overs})"
+        val batscore : String get() = (when {
+                bat_team.innings.size>0 -> "${bat_team.name} - ${bat_team.innings.get(0).score}/${bat_team.innings.get(
+                        0
+                ).wkts} (${bat_team.innings.get(0).overs})"
+                else -> ""
+        }).toString()
 
-        val getcrr : String get() = "CRR : $crr"
+        val bowscore : String get() = (when {
+                bow_team.innings.size>0 -> "${bow_team.name} - ${bow_team.innings.get(0).score}/${bow_team.innings.get(
+                        0
+                ).wkts} (${bow_team.innings.get(0).overs})"
+                else -> ""
+        }).toString()
+
+
+        val getcrr : String get() = "CRR : ${crr}"
 
 }
 
@@ -139,4 +156,9 @@ data class Commentary(val match_id : Int,
 data class CommentaryLines(
         val o_no : String = "",
         val score : String = "",
-        val comm : String = "")
+        val comm : String = ""){
+
+        val comline : String get() = "${o_no} ${Html.fromHtml(comm)}"
+}
+
+

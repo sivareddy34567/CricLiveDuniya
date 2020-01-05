@@ -31,101 +31,50 @@
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true">
+        app:cardBackgroundColor="@color/colorPrimary"
+        android:layout_height="100dp"
+        app:cardElevation="10dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="10dp"
+        android:minHeight="100dp"
+        android:minWidth="450dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-<!--            <androidx.constraintlayout.widget.Guideline-->
-<!--                android:id="@+id/left_well"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="vertical"-->
-<!--                app:layout_constraintGuide_begin="8dp" />-->
-
-<!--            <androidx.constraintlayout.widget.Guideline-->
-<!--                android:id="@+id/right_well"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                android:orientation="vertical"-->
-<!--                app:layout_constraintGuide_end="8dp" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/title"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="8dp"-->
-<!--                android:layout_marginLeft="8dp"-->
-<!--                android:layout_marginEnd="8dp"-->
-<!--                android:layout_marginRight="8dp"-->
-<!--                android:maxLines="3"-->
-<!--                android:text="@{match.title}"-->
-<!--                android:textAlignment="center"-->
-<!--                android:textAllCaps="false"-->
-<!--                android:textStyle="bold"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                tools:text="Video title" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/status"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="@{match.header.status}"-->
-<!--                android:layout_marginTop="8dp"-->
-<!--                android:textAlignment="center"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@+id/title"-->
-<!--                />-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="16dp"
+                android:text="@{match.title}"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.426"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Video title"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{match.header.status}"
+                android:paddingLeft="10dp"
+                android:textColor="#fff"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.465"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:maxLines="3"
-                    android:text="@{match.title}"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textStyle="bold"
-                    tools:text="Video title" />
-
-                <TextView
-                    android:id="@+id/status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="@{match.header.status}"
-                    android:textAlignment="center"/>
-
-            </LinearLayout>
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                app:layout_constraintVertical_bias="0.353"
+                tools:text="Status" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

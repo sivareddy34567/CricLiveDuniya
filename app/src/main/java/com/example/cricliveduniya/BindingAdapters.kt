@@ -1,5 +1,4 @@
-package com.narasimha.diceroller.marsrealestate.detail
-
+package com.example.cricliveduniya
 import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri

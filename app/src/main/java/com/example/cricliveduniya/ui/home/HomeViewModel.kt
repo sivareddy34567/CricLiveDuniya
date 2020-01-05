@@ -26,12 +26,12 @@ class HomeViewModel : ViewModel() {
     // The external immutable LiveData for the request status String
 
 
-    private val _navigateToSelectedProperty = MutableLiveData<Matches>()
+    private val _navigateToSelectedProperty = MutableLiveData<Int>()
 
-    val navigateToSelectedProperty: LiveData<Matches>
+    val navigateToSelectedProperty: LiveData<Int>
         get() = _navigateToSelectedProperty
 
-    fun displayPropertyDetails(marsProperty: Matches) {
+    fun displayPropertyDetails(marsProperty: Int) {
         _navigateToSelectedProperty.value = marsProperty
     }
 

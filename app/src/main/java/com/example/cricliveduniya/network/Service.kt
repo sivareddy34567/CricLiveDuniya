@@ -20,8 +20,14 @@ interface DevbyteService {
     @GET("cbzios/match/livematches")
     fun getPlaylist(): Deferred<AllMatches>
 
+    @GET("cbzios/match/{id}")
+    fun getMatchDetails(@Path("id") id: Int): Deferred<MatchDetails>
+
     @GET("cbzios/match/{id}/commentary")
     fun getCommentary(@Path("id") id : Int): Deferred<Commentary>
+
+    @GET("cbzios/match/{id}/scorecard")
+    fun getScorecard(@Path("id") id: Int): Deferred<ScoreCard>
 }
 
 /**

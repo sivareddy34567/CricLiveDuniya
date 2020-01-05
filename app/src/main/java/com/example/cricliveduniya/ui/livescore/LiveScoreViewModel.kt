@@ -5,16 +5,14 @@ import android.os.CountDownTimer
 import android.os.Handler
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.cricliveduniya.network.Commentary
-import com.example.cricliveduniya.network.Matches
-import com.example.cricliveduniya.network.Network
+import com.example.cricliveduniya.network.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class LiveScoreViewModel(
-    matches: Matches,
+    matches: Int,
     app: Application
 ) : AndroidViewModel(app) {
 
@@ -26,10 +24,17 @@ class LiveScoreViewModel(
     val status: LiveData<MarsApiStatus>
         get() = _status
 
+
+
     private val _properties = MutableLiveData<Commentary>()
 
     val properties: LiveData<Commentary>
         get() = _properties
+
+    private val _matchdet = MutableLiveData<MatchDetails>()
+
+    val matchdet: LiveData<MatchDetails>
+        get() = _matchdet
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
@@ -41,14 +46,31 @@ class LiveScoreViewModel(
         // This is when the game is over
         const val DONE = 0L
 
+        val playersnames : HashMap<String,Players> = HashMap()
+
         private const val COUNTDOWN_PANIC_SECONDS = 10L
         // This is the number of milliseconds in a second
-        const val ONE_SECOND = 5000L
+        const val ONE_SECOND = 10000L
         // This is the total time of the game
         const val COUNTDOWN_TIME = 10000000L
     }
 
+    private val _navigateToSelectedProperty = MutableLiveData<Int>()
+
+    val navigateToSelectedProperty: LiveData<Int>
+        get() = _navigateToSelectedProperty
+
+    fun displayPropertyDetails(marsProperty: Int) {
+        _navigateToSelectedProperty.value = marsProperty
+    }
+
+    fun displayPropertyDetailsComplete() {
+        _navigateToSelectedProperty.value = null
+    }
+
+
     init {
+        getmatchdet(matches)
         getCommantary(matches)
         timer = object : CountDownTimer(COUNTDOWN_TIME, ONE_SECOND){
             override fun onFinish() {
@@ -56,6 +78,7 @@ class LiveScoreViewModel(
             }
 
             override fun onTick(millisUntilFinished: Long) {
+                if(properties.value?.header?.state.equals("inprogress"))
                 getCommantary(matches)
             }
 
@@ -63,9 +86,28 @@ class LiveScoreViewModel(
         timer.start()
     }
 
-    private fun getCommantary(matches: Matches) {
+    private fun getmatchdet(matches: Int) {
         coroutineScope.launch {
-            val getPropertiesDeferred = Network.devbytes.getCommentary(matches.match_id)
+            val getPropertiesDeferred = Network.devbytes.getMatchDetails(matches)
+            try {
+                _status.value = MarsApiStatus.LOADING
+
+                val listResult =  getPropertiesDeferred.await()
+                for (s in listResult.players){
+                    playersnames.put(s.id,s)
+                }
+                System.out.println(listResult.toString())
+                _status.value = MarsApiStatus.DONE
+                _matchdet.value = listResult
+            } catch (e: Exception) {
+                _status.value = MarsApiStatus.ERROR
+            }
+        }
+    }
+
+    private fun getCommantary(matches: Int) {
+        coroutineScope.launch {
+            val getPropertiesDeferred = Network.devbytes.getCommentary(matches)
             try {
                 _status.value = MarsApiStatus.LOADING
 
