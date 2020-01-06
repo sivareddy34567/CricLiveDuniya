@@ -12,63 +12,64 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="4dp"
-
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{bowler.name}"
-                android:gravity="center"
-                tools:text="Batting" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                tools:text="Bowler name" />
-
-        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="@{bowler.name}"
+            tools:text="Batting" />
+
+        <TextView
+            android:layout_width="@dimen/_40sdp"
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:gravity="center"
             android:text="@{bowler.o}"
-            tools:text="  R  " />
+            tools:text="O" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_30sdp"
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:gravity="center"
             android:text="@{bowler.m}"
-            tools:text="  B  " />
+            tools:text="M" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_35sdp"
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:gravity="center"
             android:text="@{bowler.r}"
-            tools:text=" 4 s " />
+            tools:text=" R " />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_30sdp"
             android:layout_height="wrap_content"
             android:padding="4dp"
             android:gravity="center"
             android:text="@{bowler.w}"
-            tools:text="  6s  " />
+            tools:text="  W  " />
+
+<!--        <TextView-->
+<!--            android:layout_width="@dimen/_30sdp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="4dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="@{bowler.n}"-->
+<!--            tools:text=" N " />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="@dimen/_30sdp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="4dp"-->
+<!--            android:gravity="center"-->
+<!--            android:text="@{bowler.wd}"-->
+<!--            tools:text="Wd" />-->
+
 
 
     </LinearLayout>

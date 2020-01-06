@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="@dimen/_175sdp"
+            android:layout_width="@dimen/_170sdp"
             android:layout_height="wrap_content"
             android:layout_margin="2dp"
             android:layout_marginStart="5dp"

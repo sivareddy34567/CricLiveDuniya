@@ -2,6 +2,7 @@ package com.example.cricliveduniya.ui.scorecard
 
 import android.app.Application
 import android.os.CountDownTimer
+import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,6 +31,11 @@ class ScoreCardViewModel(matches: Int,
 
     val properties: LiveData<ScoreCard>
         get() = _properties
+
+    private val _navigateToSelectedProperty = MutableLiveData<Int>()
+
+    val navigateToSelectedProperty: LiveData<Int>
+        get() = _navigateToSelectedProperty
 
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
@@ -82,6 +88,11 @@ class ScoreCardViewModel(matches: Int,
             }
         }
     }
+
+    fun onShowData(id : Int){
+        _navigateToSelectedProperty.value = id
+    }
+
 
 
 

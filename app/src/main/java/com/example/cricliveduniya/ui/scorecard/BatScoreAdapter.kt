@@ -53,7 +53,7 @@ class BatScoreAdapter : RecyclerView.Adapter<BatScoreAdapter.BatScoreAdapterView
 
     fun setdata(data: List<BatsmanId>?) {
         if (data != null) {
-            val bat = BatsmanId("Batting","","R","B","4s","6s")
+            val bat = BatsmanId("Batsman","","R","B","4s","6s")
             batslist = data as MutableList<BatsmanId>
             batslist.add(0,bat)
             notifyDataSetChanged()

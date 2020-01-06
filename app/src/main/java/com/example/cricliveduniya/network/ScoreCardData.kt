@@ -12,13 +12,41 @@ data class ScoreCard(
     val status : String,
     val state : String){
 
-    val fInnings : String get() = (when {
-        Innings.size>1-> Innings.get(1).bat_team_name
-        Innings.size == 1 -> Innings.get(0).bat_team_name
-        else -> ""
-    }).toString()
+    fun inningsTotal(id : Int) : String{
+        if (Innings.size>id) {
+            return "${Innings.get(id).score}(${Innings.get(id).wkts}wkts,${Innings.get(id).ovr}Ov)"
+        }
+        else return ""
+    }
 
-    val sInnings : String get() = Innings.get(0).bat_team_name
+    fun inningsExtras(id : Int) : String{
+        if (Innings.size>id) {
+            val ext : InningsExtras = Innings.get(id).extras
+            return ext.t+"(b ${ext.b},lb ${ext.lb},wd ${ext.wd},nb ${ext.nb},p ${ext.p})"
+        }
+        else return ""
+    }
+
+    fun inningsscore(id: Int) : String {
+        if (Innings.size>id) {
+            return Innings.get(id).score+"-"+Innings.get(id).wkts+"(${Innings.get(id).ovr})"
+        }
+        else return ""
+    }
+
+    fun sInnings(id:Int) : String {
+        if (Innings.size>id) {
+            if (LiveScoreViewModel.type.equals("TEST")){
+                if (Innings.get(id).innings_id.toInt() == 3 || Innings.get(id).innings_id.toInt() == 4) {
+                    return Innings.get(id).bat_team_name+ " 2nd Innings"
+                }
+                else return Innings.get(id).bat_team_name+ " 1st Innings"
+            }
+            else return Innings.get(id).bat_team_name+ "  Innings"
+
+        }
+        else return ""
+    }
 }
 
 @JsonClass(generateAdapter = true)

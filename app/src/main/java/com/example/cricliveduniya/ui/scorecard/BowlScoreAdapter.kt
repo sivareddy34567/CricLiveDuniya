@@ -54,7 +54,7 @@ class BowlScoreAdapter : RecyclerView.Adapter<BowlScoreAdapter.BowlScoreAdapterV
 
     fun setdata(data: List<BowlerId>?) {
         if (data != null) {
-            val bowl = BowlerId("Bowling","O","M","R","W", " N","Wd")
+            val bowl = BowlerId("Bowler","O","M","R","W", " N","Wd")
             bowllist = data as MutableList<BowlerId>
             bowllist.add(0,bowl)
             notifyDataSetChanged()

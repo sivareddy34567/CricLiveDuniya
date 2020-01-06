@@ -47,6 +47,7 @@ class LiveScoreViewModel(
         const val DONE = 0L
 
         val playersnames : HashMap<String,Players> = HashMap()
+        var type : String = ""
 
         private const val COUNTDOWN_PANIC_SECONDS = 10L
         // This is the number of milliseconds in a second
@@ -96,6 +97,7 @@ class LiveScoreViewModel(
                 for (s in listResult.players){
                     playersnames.put(s.id,s)
                 }
+                type = listResult.header.type
                 System.out.println(listResult.toString())
                 _status.value = MarsApiStatus.DONE
                 _matchdet.value = listResult

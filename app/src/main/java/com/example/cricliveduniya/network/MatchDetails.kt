@@ -61,10 +61,10 @@ data class Players(
     val id : String,
     val f_name : String,
     val name : String,
-    val bat_style : String,
+    val bat_style : String = "",
     val bowl_style : String = "",
-    val speciality : String,
+    val speciality : String = "",
     val role : String = "",
-    val image : String) {
+    val image : String = "") {
 
 }

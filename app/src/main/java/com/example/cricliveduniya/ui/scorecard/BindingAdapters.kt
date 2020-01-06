@@ -20,6 +20,15 @@ fun bindRecyclerView1(recyclerView: RecyclerView, data: InningsItem?){
     adapter.setdata(data?.bowlers)
 }
 
+@BindingAdapter("isVisible")
+fun setIsVisible(view: View, isVisible: Boolean) {
+    if (isVisible) {
+        view.visibility = View.VISIBLE
+    } else {
+        view.visibility = View.GONE
+    }
+}
+
 
 
 @BindingAdapter("marsApiStatus")
